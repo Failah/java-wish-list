@@ -55,7 +55,6 @@ public class Main {
 			if (input.equals("s")) {
 				try {
 					System.out.println("Inserisci il titolo della lista: ");
-					System.out.println();
 					String title = s.nextLine();
 					myWriter.write("NOME LISTA: " + title.toUpperCase() + System.lineSeparator());
 					int j = 1;
@@ -63,7 +62,7 @@ public class Main {
 						myWriter.write(j + ") " + desidero + System.lineSeparator());
 						j++;
 					}
-					myWriter.write("");
+					myWriter.write(" " + System.lineSeparator());
 
 					System.out.println("Scrittura sul file eseguita correttamente.");
 					System.out.println();
