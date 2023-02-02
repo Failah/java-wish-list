@@ -19,6 +19,12 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
+		FileWriter myWriter = null;
+		try {
+			myWriter = new FileWriter("file.txt");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		boolean exit = false;
 
 		while (!exit) {
@@ -49,21 +55,22 @@ public class Main {
 			if (input.equals("s")) {
 				try {
 					System.out.println("Inserisci il titolo della lista: ");
+					System.out.println();
 					String title = s.nextLine();
-					FileWriter myWriter = new FileWriter("file.txt");
 					myWriter.write("NOME LISTA: " + title.toUpperCase() + System.lineSeparator());
 					int j = 1;
 					for (String desidero : desideri) {
 						myWriter.write(j + ") " + desidero + System.lineSeparator());
 						j++;
 					}
-					myWriter.close();
+					myWriter.write("");
+
 					System.out.println("Scrittura sul file eseguita correttamente.");
+					System.out.println();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-
 			// end scrivere il file
 
 			System.out.println("Vuoi creare una nuova lista? s/n");
@@ -72,6 +79,11 @@ public class Main {
 				exit = true;
 				System.out.println("Programma terminato.");
 			}
+		}
+		try {
+			myWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		s.close();
 	}
