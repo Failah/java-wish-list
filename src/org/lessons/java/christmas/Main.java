@@ -10,6 +10,8 @@ stampare a video la lista ordinata
 
 package org.lessons.java.christmas;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,14 +65,33 @@ public class Main {
 						j++;
 					}
 					myWriter.write(" " + System.lineSeparator());
+					myWriter.flush();
 
 					System.out.println("Scrittura sul file eseguita correttamente.");
-					System.out.println();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 			// end scrivere il file
+
+			// leggere il file con le liste
+			System.out.println();
+			System.out.println("Vuoi leggere il contenuto del file.txt? s/n");
+			String input2 = s.nextLine();
+			if (input2.equals("s")) {
+				File listaTxt = new File("file.txt");
+				try {
+					Scanner reader = new Scanner(listaTxt);
+					while (reader.hasNextLine()) {
+						String data = reader.nextLine();
+						System.out.println(data);
+					}
+					reader.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+			// end leggere il file con le liste
 
 			System.out.println("Vuoi creare una nuova lista? s/n");
 			String scelta = s.nextLine();
