@@ -10,6 +10,8 @@ stampare a video la lista ordinata
 
 package org.lessons.java.christmas;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -39,6 +41,30 @@ public class Main {
 				System.out.println("Elemento " + i + " => " + desider);
 				i++;
 			}
+
+			// scrivere il file
+			System.out.println();
+			System.out.println("Vuoi scrivere la lista generata sul file.txt? s/n");
+			String input = s.nextLine();
+			if (input.equals("s")) {
+				try {
+					System.out.println("Inserisci il titolo della lista: ");
+					String title = s.nextLine();
+					FileWriter myWriter = new FileWriter("file.txt");
+					myWriter.write("NOME LISTA: " + title.toUpperCase() + System.lineSeparator());
+					int j = 1;
+					for (String desidero : desideri) {
+						myWriter.write(j + ") " + desidero + System.lineSeparator());
+						j++;
+					}
+					myWriter.close();
+					System.out.println("Scrittura sul file eseguita correttamente.");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			// end scrivere il file
 
 			System.out.println("Vuoi creare una nuova lista? s/n");
 			String scelta = s.nextLine();
