@@ -16,32 +16,37 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		ArrayList<String> desideri = new ArrayList<String>();
 		Scanner s = new Scanner(System.in);
-		boolean continua = true;
+		boolean exit = false;
 
-		while (continua) {
-			System.out.println("La lista dei desideri contiene " + desideri.size() + " elementi.");
-			System.out.print("Inserisci un nuovo elemento alla lista o digita 'stop' per terminare: ");
+		while (!exit) {
+			ArrayList<String> desideri = new ArrayList<String>();
+			System.out.println("Inserisci un nuovo elemento alla lista o digita 'stop' per terminare: ");
 			String desiderio = s.nextLine();
-			System.out.println();
-
-			if (desiderio.equals("stop")) {
-				continua = false;
-			} else {
+			while (!desiderio.equals("stop")) {
 				desideri.add(desiderio);
+				System.out.println("La lista dei desideri contiene " + desideri.size() + " elementi.");
+				System.out.print("Inserisci un nuovo elemento alla lista o digita 'stop' per terminare: ");
+				desiderio = s.nextLine();
+				System.out.println();
+			}
+
+			Collections.sort(desideri);
+			System.out.println(
+					"La lista dei desideri è composta da " + desideri.size() + " elementi, che sono i seguenti: ");
+			int i = 1;
+			for (String desider : desideri) {
+				System.out.println("Elemento " + i + " => " + desider);
+				i++;
+			}
+
+			System.out.println("Vuoi creare una nuova lista? s/n");
+			String scelta = s.nextLine();
+			if (scelta.equals("n")) {
+				exit = true;
+				System.out.println("Programma terminato.");
 			}
 		}
-
-		Collections.sort(desideri);
-		System.out
-				.println("La lista dei desideri è composta da " + desideri.size() + " elementi, che sono i seguenti: ");
-		int i = 1;
-		for (String desiderio : desideri) {
-			System.out.println("Elemento " + i + " => " + desiderio);
-			i++;
-		}
-
 		s.close();
 	}
 }
